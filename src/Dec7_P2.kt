@@ -3,10 +3,9 @@ import java.io.File
 fun main() {
     fun canCalibrate(curr: Long, result: Long, numList: List<Long>): Boolean {
         val first = numList.firstOrNull() ?: return curr == result
-        val withAdd = canCalibrate(curr + first, result, numList.subList(1, numList.size))
-        val withMul = canCalibrate(curr * first, result, numList.subList(1, numList.size))
-        val withConcat = canCalibrate((curr.toString() + first.toString()).toLong(), result, numList.subList(1, numList.size))
-        return withAdd || withMul || withConcat
+        return canCalibrate(curr + first, result, numList.subList(1, numList.size))
+                || canCalibrate(curr * first, result, numList.subList(1, numList.size))
+                || canCalibrate((curr.toString() + first.toString()).toLong(), result, numList.subList(1, numList.size))
     }
 
     val lines = File("src/Dec7.txt").readLines()
