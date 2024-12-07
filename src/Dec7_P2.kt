@@ -1,23 +1,22 @@
 import java.io.File
-import java.math.BigInteger
 
 fun main() {
-    fun canCalibrate(curr: BigInteger, result: BigInteger, numList: List<BigInteger>): Boolean {
-        if (numList.isEmpty()) return curr == result
-        val withAdd = canCalibrate(curr + numList[0], result, numList.drop(1).toList())
-        val withMul = canCalibrate(curr * numList[0], result, numList.drop(1).toList())
-        val withConcat = canCalibrate(BigInteger(curr.toString() + numList[0].toString()), result, numList.drop(1).toList())
+    fun canCalibrate(curr: Long, result: Long, numList: List<Long>): Boolean {
+        val first = numList.firstOrNull() ?: return curr == result
+        val withAdd = canCalibrate(curr + first, result, numList.subList(1, numList.size))
+        val withMul = canCalibrate(curr * first, result, numList.subList(1, numList.size))
+        val withConcat = canCalibrate((curr.toString() + first.toString()).toLong(), result, numList.subList(1, numList.size))
         return withAdd || withMul || withConcat
     }
 
     val lines = File("src/Dec7.txt").readLines()
-    var sum = BigInteger.ZERO
+    var sum = 0L
     lines.forEach { line ->
         val (resultStr, nums) = line.split(": ")
-        val result = resultStr.toBigInteger()
-        val numList = nums.split(" ").map { it.toBigInteger() }
+        val result = resultStr.toLong()
+        val numList = nums.split(" ").map { it.toLong() }
 
-        if (canCalibrate(BigInteger.ZERO, result, numList)) {
+        if (canCalibrate(0L, result, numList)) {
             println(line)
             sum += result
         }
