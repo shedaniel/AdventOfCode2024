@@ -1,4 +1,5 @@
-typealias Coord = Pair<Int, Int>
+typealias P<A, B> = Pair<A, B>
+typealias Coord = P<Int, Int>
 
 val Coord.x: Int
     get() = this.first
