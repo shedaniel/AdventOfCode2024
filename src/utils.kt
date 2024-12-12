@@ -23,6 +23,22 @@ operator fun Coord.div(scalar: Int): Coord {
     return Coord(this.x / scalar, this.y / scalar)
 }
 
+val List<Array<Any>>.width: Int
+    @JvmName("ListArrayWidth")
+    get() = get(0).size
+
+val List<Array<Any>>.height: Int
+    @JvmName("ListArrayHeight")
+    get() = size
+
+val List<CharArray>.width: Int
+    @JvmName("ListCharArrayWidth")
+    get() = get(0).size
+
+val List<CharArray>.height: Int
+    @JvmName("ListCharArrayHeight")
+    get() = size
+
 @JvmName("ListArrayContains")
 operator fun <T> List<Array<out T>>.contains(coord: Coord): Boolean {
     return coord.y in this.indices && coord.x in this[coord.y].indices
