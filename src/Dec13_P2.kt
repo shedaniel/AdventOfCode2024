@@ -1,23 +1,23 @@
 import java.io.File
 
 fun main() {
-    fun calc(buttonA: P<Long, Long>, buttonB: P<Long, Long>, prize: P<Long, Long>): Long? {
-        val det = buttonA.first * buttonB.second - buttonA.second * buttonB.first
+    fun calc(buttonA: LCoord, buttonB: LCoord, prize: LCoord): Long? {
+        val det = buttonA.x * buttonB.y - buttonA.y * buttonB.x
         if (det == 0L) return null
 
-        val bTries = (buttonA.first * prize.second - buttonA.second * prize.first).toDouble() / det.toDouble()
+        val bTries = (buttonA.x * prize.y - buttonA.y * prize.x).toDouble() / det.toDouble()
         if (bTries % 1 != 0.0) return null
         val bTriesL = bTries.toLong()
 
-        val aTries = (prize.first - buttonB.first * bTriesL).toDouble() / buttonA.first.toDouble()
+        val aTries = (prize.x - buttonB.x * bTriesL).toDouble() / buttonA.x.toDouble()
         if (aTries % 1 != 0.0) return null
         val aTriesL = aTries.toLong()
 
         var min = aTriesL * 3 + bTriesL
 
         for (k in -100..100) { // bruce force lol
-            val aAdjusted = aTriesL - k * (buttonA.second / det)
-            val bAdjusted = bTriesL + k * (buttonB.second / det)
+            val aAdjusted = aTriesL - k * (buttonA.y / det)
+            val bAdjusted = bTriesL + k * (buttonB.y / det)
 
             if (bAdjusted >= 0 && aAdjusted >= 0) {
                 val currentCost = aAdjusted * 3 + bAdjusted
