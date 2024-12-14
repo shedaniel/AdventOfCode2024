@@ -34,38 +34,55 @@ operator fun Coord.rem(scalar: Int): Coord {
     return Coord(this.x % scalar, this.y % scalar)
 }
 
+operator fun Coord.rem(coord: Coord): Coord {
+    return Coord(this.x % coord.x, this.y % coord.y)
+}
+
 operator fun Coord.unaryMinus(): Coord {
     return Coord(-this.x, -this.y)
 }
 
+@JvmName("LCoordPlusLCoord")
 operator fun LCoord.plus(coord: LCoord): LCoord {
     return LCoord(this.x + coord.x, this.y + coord.y)
 }
 
+@JvmName("LCoordMinusLCoord")
 operator fun LCoord.minus(coord: LCoord): LCoord {
     return LCoord(this.x - coord.x, this.y - coord.y)
 }
 
+@JvmName("LCoordTimesLong")
 operator fun LCoord.times(scalar: Long): LCoord {
     return LCoord(this.x * scalar, this.y * scalar)
 }
 
+@JvmName("LCoordDivLong")
 operator fun LCoord.div(scalar: Long): LCoord {
     return LCoord(this.x / scalar, this.y / scalar)
 }
 
+@JvmName("LCoordRemLong")
 operator fun LCoord.rem(scalar: Long): LCoord {
     return LCoord(this.x % scalar, this.y % scalar)
 }
 
+@JvmName("LCoordRemLCoord")
+operator fun LCoord.rem(coord: LCoord): LCoord {
+    return LCoord(this.x % coord.x, this.y % coord.y)
+}
+
+@JvmName("LCoordUnaryMinus")
 operator fun LCoord.unaryMinus(): LCoord {
     return LCoord(-this.x, -this.y)
 }
 
+@JvmName("LCoordPlusCoord")
 operator fun LCoord.plus(coord: Coord): LCoord {
     return this + coord.toLCoord()
 }
 
+@JvmName("LCoordMinusCoord")
 operator fun LCoord.minus(coord: Coord): LCoord {
     return this - coord.toLCoord()
 }
